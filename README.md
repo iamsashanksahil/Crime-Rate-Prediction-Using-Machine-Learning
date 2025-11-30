@@ -131,6 +131,7 @@ navimumbai-crime-prediction/
 ├── requirements.txt           # Python dependencies
 └── README.md                  # Project documentation
 ```
+Model file is not included due to size limit. (crime_model.pkl)
 
 ## Data Description
 
@@ -187,7 +188,7 @@ The Random Forest model analyzes multiple features to predict crime types. The m
 - Improved model performance with ensemble methods
 
 ## Submission Information
-- **Project Title:** Navi Mumbai Crime Prediction System
+- **Project Title:** Navi Mumbai Crime Prediction Using Machine Learning
 - **Author:** [Your Name]
 - **Date:** March 27, 2025
 - **Course/Module:** [Course Name]
