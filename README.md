@@ -333,6 +333,9 @@ This project is developed for **educational and academic purposes only**. Predic
 ## Project Information
 
 **Project Title:** Crime Rate Prediction Using Machine Learning
+
 **Developed By:** Sashank Sahil
+
 **Course:** B.Tech Computer Science Engineering
-**Academic Project Year:** Final Year Project (Updation)
+
+**Academic Project Year:** Final Year Project
