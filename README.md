@@ -216,11 +216,18 @@ Result:
 
 ---
 
-### 7. Machine Learning Prediction Quality Issues
+### 7. Machine Learning Prediction Behavior
 
-#### Problem
+#### Observation
 
-Certain predictions occasionally appeared unrealistic.
+Since the model is trained on historical crime data, predictions depend entirely on statistical patterns learned from the dataset.
+
+In some cases, predictions may appear unexpected due to:
+
+* Dataset imbalance
+* Rare feature combinations
+* Historical pattern dependencies
+* Feature weighting during model training
 
 Example:
 
@@ -229,25 +236,31 @@ Weapon Used: Explosive
 Predicted Crime: Fraud
 ```
 
-#### Reason
+#### Explanation
 
-The model predicts based on historical statistical patterns rather than logical reasoning.
+The machine learning model does not apply human reasoning. It predicts outcomes based on patterns present in historical data used during training.
 
-Factors affecting prediction:
+Therefore, predictions depend on learned relationships between features such as:
 
-* Dataset imbalance
-* Rare combinations
-* Feature weighting
-* Historical data patterns
+* Location
+* Time
+* Victim demographics
+* Weapon used
+* Historical crime distribution
 
-#### Improvements Considered
+#### Future Improvements Considered
+
+Potential enhancements for better prediction consistency:
 
 * Dataset cleaning
+* Feature refinement
 * Removal of unrealistic combinations
-* Better preprocessing
-* Feature consistency improvements
+* Better data preprocessing
+* Improved training dataset quality
+
 
 ---
+
 
 ## Final Enhanced Version
 
