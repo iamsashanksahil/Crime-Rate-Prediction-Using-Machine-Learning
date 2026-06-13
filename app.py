@@ -33,10 +33,7 @@ warnings.filterwarnings(
     category=InconsistentVersionWarning
 )
 
-# ==========================
 # CONFIG
-# ==========================
-
 CSV_FILE = 'NaviMumbai_Crime_Data_Updated.csv'
 MODEL_FILE = 'crime_model.pkl'
 
@@ -46,10 +43,7 @@ GENDER_ENCODER = 'label_encoder_gender.pkl'
 WEAPON_ENCODER = 'label_encoder_weapon.pkl'
 
 
-# ==========================
 # CREATE APP
-# ==========================
-
 app = Flask(__name__)
 app.secret_key = os.environ.get(
     'SECRET_KEY',
@@ -62,10 +56,7 @@ users = {
 }
 
 
-# ==========================
 # LOAD DATASET
-# ==========================
-
 if not os.path.exists(CSV_FILE):
     raise FileNotFoundError(
         f"{CSV_FILE} not found."
@@ -74,10 +65,7 @@ if not os.path.exists(CSV_FILE):
 df = pd.read_csv(CSV_FILE)
 
 
-# ==========================
 # DATA CLEANING
-# ==========================
-
 # Fill missing values
 df['City'] = df['City'].fillna('Unknown')
 df['Victim Gender'] = df['Victim Gender'].fillna('Unknown')
@@ -105,10 +93,7 @@ df['Time'] = pd.to_numeric(
 df['Time'] = df['Time'].fillna(0)
 
 
-# ==========================
 # CREATE MODEL IF MISSING
-# ==========================
-
 if not os.path.exists(MODEL_FILE):
     print("Model files not found. Creating model...")
 
@@ -196,10 +181,7 @@ if not os.path.exists(MODEL_FILE):
     print("Model created successfully.")
 
 
-# ==========================
 # LOAD MODEL + ENCODERS
-# ==========================
-
 with open(MODEL_FILE, 'rb') as f:
     model = pickle.load(f)
 
@@ -216,10 +198,7 @@ with open(WEAPON_ENCODER, 'rb') as f:
     le_weapon = pickle.load(f)
 
 
-# ==========================
 # VISUALIZATION FUNCTIONS
-# ==========================
-
 def plot_to_base64():
     img = io.BytesIO()
 
@@ -386,10 +365,7 @@ def create_crime_heatmap():
     return plot_to_base64()
 
 
-# ==========================
 # ROUTES
-# ==========================
-
 @app.route('/')
 def index():
 
