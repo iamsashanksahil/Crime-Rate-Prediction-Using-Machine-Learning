@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="page-title mb-1">
+                <i class="bi bi-speedometer2"></i>
+                Crime Analytics Dashboard
+            </h1>
+
+            <p class="text-light opacity-75">
+                Real-time crime analysis and insights
+            </p>
+        </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card h-100">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h6 class="text-light opacity-75">
+                            Total Crimes
+                        </h6>
+
+                        <h2 class="fw-bold text-info">
+                            {{ total_crimes }}
+                        </h2>
+                    </div>
+
+                    <i class="bi bi-file-earmark-bar-graph"
+                       style="font-size:2.5rem;color:#38bdf8;">
+                    </i>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card h-100">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h6 class="text-light opacity-75">
+                            Cities Covered
+                        </h6>
+
+                        <h2 class="fw-bold text-success">
+                            {{ total_cities }}
+                        </h2>
+                    </div>
+
+                    <i class="bi bi-geo-alt-fill"
+                       style="font-size:2.5rem;color:#22c55e;">
+                    </i>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card h-100">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h6 class="text-light opacity-75">
+                            Crime Categories
+                        </h6>
+
+                        <h2 class="fw-bold text-warning">
+                            {{ total_crime_types }}
+                        </h2>
+                    </div>
+
+                    <i class="bi bi-shield-fill-exclamation"
+                       style="font-size:2.5rem;color:#f59e0b;">
+                    </i>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card h-100">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h6 class="text-light opacity-75">
+                            Avg Victim Age
+                        </h6>
+
+                        <h2 class="fw-bold text-danger">
+                            {{ avg_age }}
+                        </h2>
+                    </div>
+
+                    <i class="bi bi-person-fill"
+                       style="font-size:2.5rem;color:#ef4444;">
+                    </i>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- CHARTS -->
+    <div class="row g-4">
+
+        <!-- Crime Severity -->
+        <div class="col-lg-6">
+
+            <div class="glass-card h-100">
+
+                <h4 class="mb-4">
+                    <i class="bi bi-pie-chart-fill text-info"></i>
+                    Crime Severity Distribution
+                </h4>
+
+                <img src="data:image/png;base64,{{ crime_severity_chart }}"
+                     class="img-fluid rounded-4 w-100"
+                     alt="Crime Severity">
+
+            </div>
+
+        </div>
+
+
+        <!-- Gender Chart -->
+        <div class="col-lg-6">
+
+            <div class="glass-card h-100">
+
+                <h4 class="mb-4">
+                    <i class="bi bi-gender-ambiguous text-success"></i>
+                    Victim Gender Analysis
+                </h4>
+
+                <img src="data:image/png;base64,{{ gender_chart }}"
+                     class="img-fluid rounded-4 w-100"
+                     alt="Gender Chart">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEATMAP -->
+    <div class="row mt-4">
+
+        <div class="col-12">
+
+            <div class="glass-card">
+
+                <h4 class="mb-4">
+                    <i class="bi bi-map-fill text-warning"></i>
+                    Crime Density Heatmap
+                </h4>
+
+                <img src="data:image/png;base64,{{ crime_heatmap }}"
+                     class="img-fluid rounded-4 w-100"
+                     alt="Crime Heatmap">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

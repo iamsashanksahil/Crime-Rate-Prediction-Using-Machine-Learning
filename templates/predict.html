@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="page-title">
+    <i class="bi bi-graph-up-arrow"></i>
+    Crime Prediction
+</h1>
+
+<div class="row g-4">
+
+    <!-- LEFT SIDE FORM -->
+    <div class="col-lg-5">
+
+        <div class="glass-card">
+
+            <h4 class="mb-4">
+                <i class="bi bi-sliders"></i>
+                Prediction Parameters
+            </h4>
+
+            <form method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Longitude
+                    </label>
+
+                    <input type="number"
+                           step="0.0001"
+                           class="form-control"
+                           name="longitude"
+                           placeholder="73.0295"
+                           value="{{ request.form.get('longitude', '73.0295') }}"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Latitude
+                    </label>
+
+                    <input type="number"
+                           step="0.0001"
+                           class="form-control"
+                           name="latitude"
+                           placeholder="19.0347"
+                           value="{{ request.form.get('latitude', '19.0347') }}"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        City
+                    </label>
+
+                    <select class="form-select"
+                            name="city"
+                            required>
+
+                        {% for city in cities %}
+                        <option value="{{ city }}"
+                        {% if request.form.get('city') == city %}
+                        selected
+                        {% endif %}>
+                            {{ city }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Time of Crime (24hr)
+                    </label>
+
+                    <input type="number"
+                           min="0"
+                           max="23"
+                           step="0.01"
+                           class="form-control"
+                           name="time"
+                           placeholder="14.30"
+                           value="{{ request.form.get('time', '14.30') }}"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Victim Age
+                    </label>
+
+                    <input type="range"
+                           min="1"
+                           max="100"
+                           value="{{ request.form.get('age', '35') }}"
+                           class="form-range"
+                           id="ageRange"
+                           name="age"
+                           oninput="ageValue.innerText=this.value">
+
+                    <div class="text-light mb-2">
+                        Age:
+                        <span id="ageValue">
+                            {{ request.form.get('age', '35') }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Victim Gender
+                    </label>
+
+                    <select class="form-select"
+                            name="gender"
+                            required>
+
+                        {% for gender in genders %}
+                        <option value="{{ gender }}"
+                        {% if request.form.get('gender') == gender %}
+                        selected
+                        {% endif %}>
+                            {{ gender }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">
+                        Weapon Used
+                    </label>
+
+                    <select class="form-select"
+                            name="weapon"
+                            required>
+
+                        {% for weapon in weapons %}
+                        <option value="{{ weapon }}"
+                        {% if request.form.get('weapon') == weapon %}
+                        selected
+                        {% endif %}>
+                            {{ weapon }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-custom w-100">
+
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    Predict Crime
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE RESULTS -->
+    <div class="col-lg-7">
+
+        <div class="glass-card h-100">
+
+            <h4 class="mb-4">
+                <i class="bi bi-bar-chart-fill"></i>
+                Prediction Results
+            </h4>
+
+            {% if prediction %}
+
+            <div class="p-4 rounded-4 mb-4"
+                 style="
+                 background:
+                 linear-gradient(
+                 135deg,
+                 #0ea5e9,
+                 #2563eb
+                 );
+                 ">
+
+                <h6 class="text-light">
+                    Predicted Crime Type
+                </h6>
+
+                <h1 class="fw-bold text-white">
+                    {{ prediction }}
+                </h1>
+
+            </div>
+
+            <h5 class="mb-3">
+                Probability Distribution
+            </h5>
+
+            {% for crime, prob in probabilities %}
+
+            <div class="mb-3">
+
+                <div class="d-flex justify-content-between">
+
+                    <span>
+                        {{ crime }}
+                    </span>
+
+                    <span>
+                        {{ prob }}%
+                    </span>
+
+                </div>
+
+                <div class="progress"
+                     style="
+                     height:12px;
+                     border-radius:20px;
+                     background:#1e293b;
+                     ">
+
+                    <div class="progress-bar"
+                         role="progressbar"
+                         style="
+                         width: {{ prob }}%;
+                         background:
+                         linear-gradient(
+                         135deg,
+                         #06b6d4,
+                         #2563eb
+                         );
+                         ">
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+            {% else %}
+
+            <div class="text-center py-5">
+
+                <i class="bi bi-search"
+                   style="
+                   font-size:4rem;
+                   color:#38bdf8;
+                   ">
+                </i>
+
+                <h4 class="mt-3">
+                    No Prediction Yet
+                </h4>
+
+                <p class="text-light">
+                    Enter crime details and click
+                    predict to view results.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
