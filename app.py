@@ -367,7 +367,7 @@ def create_crime_heatmap():
 
 # ROUTES
 @app.route('/')
-def index():
+def index(): 
 
     if 'username' in session:
         return redirect(
