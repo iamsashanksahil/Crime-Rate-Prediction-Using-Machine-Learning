@@ -6,6 +6,9 @@ The **Navi Mumbai Crime Prediction System** is a machine learning based web appl
 
 The application also includes an interactive dashboard for crime analytics, helping users visualize crime severity, victim demographics, and geographical crime density.
 
+**Note:**  
+The trained machine learning model (`crime_model.pkl`) and label encoder files are intentionally excluded from this repository because of GitHub file size limitations. They are automatically generated the first time the application is executed.
+
 ---
 
 
@@ -523,6 +526,22 @@ http://127.0.0.1:5000
 
 ---
 
+## Automatic Model Generation
+
+This project does not include the trained model (`crime_model.pkl`) or label encoder files in the repository because they are generated automatically.
+
+When the application is run for the first time:
+
+- The dataset is loaded.
+- Data preprocessing is performed.
+- Label encoders are created.
+- A Random Forest model is trained.
+- The trained model and encoder files are saved locally.
+
+This process only happens once. Future runs will load the generated files automatically.
+
+---
+
 ## Project Structure
 
 ```text
@@ -531,22 +550,19 @@ navimumbai-crime-prediction/
 ├── app.py
 ├── requirements.txt
 ├── README.md
+├── .gitignore
 │
 ├── NaviMumbai_Crime_Data_Updated.csv
 │
-├── crime_model.pkl
-├── label_encoder_crime.pkl
-├── label_encoder_city.pkl
-├── label_encoder_gender.pkl
-├── label_encoder_weapon.pkl
-│
 ├── templates/
 │   ├── base.html
-│   ├── login.html
 │   ├── dashboard.html
+│   ├── login.html
 │   └── predict.html
 │
-└── static/
+├── static/
+│
+└── (Model and encoder files are generated automatically on first run.)
 ```
 
 ---
@@ -595,18 +611,20 @@ python -m pip install -r requirements.txt
 
 ### 2. Model Version Errors
 
-Delete model files:
+Delete the generated model files:
 
 ```powershell
 del crime_model.pkl
 del label_encoder_*.pkl
 ```
 
-Then rerun:
+Then rerun the application:
 
 ```powershell
 python app.py
 ```
+
+The application will automatically recreate the Random Forest model and label encoders from the dataset.
 
 ---
 
